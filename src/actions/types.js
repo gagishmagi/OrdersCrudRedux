@@ -1,0 +1,6 @@
+export const GET_ORDERS = "GET_ORDERS"
+export const GET_ORDER = "GET_ORDER"
+export const CREATE_ORDER = "CREATE_ORDER"
+export const EDIT_ORDER = "EDIT_ORDER"
+export const DELETE_ORDER = "DELETE_ORDER"
+export const DELETE_ALL_ORDERS = "DELETE_ALL_ORDERS"
