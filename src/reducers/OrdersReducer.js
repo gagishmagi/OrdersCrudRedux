@@ -1,4 +1,4 @@
-import { CREATE_ORDER, GET_ORDERS } from "../actions/types"
+import { CREATE_ORDER, GET_ORDERS, GET_ORDERS_ERROR } from "../actions/types"
 
 const initialState = {
     orders: [
@@ -6,7 +6,8 @@ const initialState = {
             id: 1,
             amount: 5
         }
-    ]
+    ],
+    error: ''
 }
 
 const  OrdersReducer = (state = initialState, action) => {
@@ -14,13 +15,16 @@ const  OrdersReducer = (state = initialState, action) => {
     switch (action.type) {
 
     case GET_ORDERS:
-        return { ...state }
+        return { ...state, orders: action.payload }
 
     case CREATE_ORDER:
         const orders = [...state.orders]
         orders.push(action.payload)
         return { ...state, orders }
     
+
+    case GET_ORDERS_ERROR:
+        return { ...state, error: action.payload }
 
     default:
         return state

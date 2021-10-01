@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import { connect } from "react-redux";
 // import { CREATE_ORDER } from "../actions/types";
-import {createOrder} from '../actions/OrdersAction'
+import {createOrder , getOrders} from '../actions/OrdersAction'
 
-function OrdersList({ orders, dispatch, createOrder }) {
+function OrdersList({ orders, dispatch, createOrder, getOrders }) {
+
+
+  useEffect(() => {
+      getOrders()
+  }, [])
+
   console.log(orders);
   return (
     <div>
@@ -37,4 +44,4 @@ function mapStatetoProps(store) {
   };
 }
 
-export default connect(mapStatetoProps,{ createOrder })(OrdersList);
+export default connect(mapStatetoProps,{ createOrder , getOrders })(OrdersList);

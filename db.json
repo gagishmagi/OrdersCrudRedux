@@ -13,6 +13,18 @@
       "amount": 600.25,
       "quanity": 50,
       "payment": true
+    },
+    {
+      "id": 3,
+      "amount": 20
+    },
+    {
+      "id": 4,
+      "amount": 20
+    },
+    {
+      "id": 5,
+      "amount": 20
     }
   ]
 }
