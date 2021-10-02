@@ -2,16 +2,16 @@ import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { connect } from "react-redux";
 // import { CREATE_ORDER } from "../actions/types";
-import { createOrder, getOrders } from "../actions/OrdersAction";
+import { createOrder, getOrders, deleteOrder } from "../actions/OrdersAction";
 
-function OrdersList({ dispatch, createOrder, getOrders }) {
+function OrdersList({ dispatch, createOrder, getOrders,deleteOrder  }) {
   const orders = useSelector((state) => state.OrdersReducer.orders);
 
   useEffect(() => 
     getOrders()
   , []);
 
-  console.log(orders);
+  // console.log(orders);
   return (
     <div>
       <h1>Orders List</h1>
@@ -20,6 +20,17 @@ function OrdersList({ dispatch, createOrder, getOrders }) {
           return (
             <li key={order.id} className="order-item">
               order amount: {order.amount}
+              <button
+                onClick={() => {
+                  //   dispatch({
+                  //     type: CREATE_ORDER,
+                  //     payload: { id: orders.length + 1, amount: 20 },
+                  //   });
+                  deleteOrder({ id: order.id });
+                }}
+              >
+                X
+              </button>
             </li>
           );
         })}
@@ -35,6 +46,7 @@ function OrdersList({ dispatch, createOrder, getOrders }) {
       >
         Add Order
       </button>
+     
     </div>
   );
 }
@@ -45,4 +57,4 @@ function OrdersList({ dispatch, createOrder, getOrders }) {
 //   };
 // }
 
-export default connect(null, { createOrder, getOrders })(OrdersList);
+export default connect(null, { createOrder, getOrders, deleteOrder })(OrdersList);

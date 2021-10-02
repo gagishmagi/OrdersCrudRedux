@@ -1,4 +1,4 @@
-import { CREATE_ORDER, GET_ORDERS, GET_ORDERS_ERROR } from "../actions/types"
+import { CREATE_ORDER, GET_ORDERS, DELETE_ORDER, GET_ORDERS_ERROR } from "../actions/types"
 
 const initialState = {
     orders: [
@@ -11,16 +11,16 @@ const initialState = {
 }
 
 const  OrdersReducer = (state = initialState, action) => {
-    console.log(action)
     switch (action.type) {
 
     case GET_ORDERS:
         return { ...state, orders: action.payload }
 
     case CREATE_ORDER:
-        const orders = [...state.orders]
-        orders.push(action.payload)
-        return { ...state, orders }
+        return { ...state, orders: [...state.orders].push(action.payload) }
+    
+    case DELETE_ORDER:
+        return { ...state, orders: state.orders.filter( (order) => order.id !== action.payload.id) }
     
 
     case GET_ORDERS_ERROR:
