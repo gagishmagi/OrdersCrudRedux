@@ -1,14 +1,15 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { connect } from "react-redux";
 // import { CREATE_ORDER } from "../actions/types";
-import {createOrder , getOrders} from '../actions/OrdersAction'
+import { createOrder, getOrders } from "../actions/OrdersAction";
 
-function OrdersList({ orders, dispatch, createOrder, getOrders }) {
+function OrdersList({ dispatch, createOrder, getOrders }) {
+  const orders = useSelector((state) => state.OrdersReducer.orders);
 
-
-  useEffect(() => {
-      getOrders()
-  }, [])
+  useEffect(() => 
+    getOrders()
+  , []);
 
   console.log(orders);
   return (
@@ -25,11 +26,11 @@ function OrdersList({ orders, dispatch, createOrder, getOrders }) {
       </ul>
       <button
         onClick={() => {
-        //   dispatch({
-        //     type: CREATE_ORDER,
-        //     payload: { id: orders.length + 1, amount: 20 },
-        //   });
-        createOrder({ id: orders.length + 1, amount: 20 })
+          //   dispatch({
+          //     type: CREATE_ORDER,
+          //     payload: { id: orders.length + 1, amount: 20 },
+          //   });
+          createOrder({ id: orders.length + 1, amount: 20 });
         }}
       >
         Add Order
@@ -38,10 +39,10 @@ function OrdersList({ orders, dispatch, createOrder, getOrders }) {
   );
 }
 
-function mapStatetoProps(store) {
-  return {
-    orders: store.OrdersReducer.orders,
-  };
-}
+// function mapStatetoProps(store) {
+//   return {
+//     orders: store.OrdersReducer.orders,
+//   };
+// }
 
-export default connect(mapStatetoProps,{ createOrder , getOrders })(OrdersList);
+export default connect(null, { createOrder, getOrders })(OrdersList);
